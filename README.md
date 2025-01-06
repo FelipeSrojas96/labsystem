@@ -1,8 +1,27 @@
-# Instrucciones 
+# Instrucciones
 
-   - En la carpeta de resources, ingresar a la consola y hacer docker-build y luego docker-compose up
+## Configuración inicial
 
+1. En la carpeta de `resources`, crear un archivo `.env` con las siguientes líneas:
 
+   - `POSTGRES_USER=ash`
+   - `POSTGRES_PASSWORD=your_password`
+   - `POSTGRES_DB=your_database`
+
+2. Abrir una consola en la misma carpeta `resources` y ejecutar los siguientes comandos:
+
+   - `docker-compose build`
+   - `docker-compose up`
+
+## Puertos disponibles
+
+- **Frontend:** Disponible en el puerto `:3000`.
+- **Backend:** Disponible en el puerto `:8000`.
+
+## Documentación de los endpoints
+
+- La documentación de los endpoints se encuentra en `/swagger`.  
+  Para acceder, abrir en el navegador: `http://localhost:8000/swagger`.
 
 
 # Prueba Fullstack - Pokémon TCG API y Frontend

@@ -1,31 +1,22 @@
-from .models import Sets, Card, Image, Market
-from .serializers import (
-    SetSerializer,
-    CardSerializer,
-    ImageSerializer,
-    MarketSerializer,
-)
+from .models import Sets, Card
+from .serializers import SetSerializer, CardSerializer
+
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
 class SetListView(APIView):
+    """
+    Retorna todos los sets
+    """
+
     def get(self, request):
         try:
-            # Fetch all sets
-            print("Request Headers:", dict(request.headers))
             sets = Sets.objects.all()
-
-            # Serialize the data
             serializer = SetSerializer(sets, many=True)
-
-            # Print serialized data for debugging
-
-            # Return serialized data as response
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            print("Error:", str(e))
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
@@ -33,7 +24,7 @@ class SetListView(APIView):
 
 class SetCardsView(APIView):
     """
-    Devuelve todas las cartas asociadas a un set específico.
+    Retorna todas las cartas de un set
     """
 
     def get(self, request, id):
@@ -53,7 +44,7 @@ class SetCardsView(APIView):
 
 class CardDetailView(APIView):
     """
-    Retrieve a card by its ID and include its market data.
+    Trae la carta de id junto a su informacion de mercado e imagen.
     """
 
     def get(self, request, id):

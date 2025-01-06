@@ -17,13 +17,13 @@ COPY . .
 RUN npm run build
 
 # Use Nginx to serve the built files
-FROM nginx:alpine
+# FROM nginx:alpine
 
 # Copy the build output to Nginx's public directory
-COPY --from=builder /app/out /usr/share/nginx/html
+# COPY --from=builder /app/out /usr/share/nginx/html
 
 # Expose the default Nginx port
-EXPOSE 80
+# EXPOSE 80
 
-# Run Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Run 
+CMD ["npm", "run","dev"]

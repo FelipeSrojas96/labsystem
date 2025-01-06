@@ -18,7 +18,7 @@ class Sets(models.Model):
 
     def __str__(self):
         return self.name
-
+#comment
 
 class Card(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
