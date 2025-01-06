@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./bdd
+      dockerfile: Dockerfile
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+
+  django:
+    build:
+      context: ./proyecto
+    container_name: django_container
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_NAME: nombre_base_datos
+      DB_USER: usuario
+      DB_PASS: contraseña
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./proyecto:/app
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000" # Map local port 3000 to the container
+    volumes:
+      - ./frontend:/app:ro # Bind mount the local directory
+      - /app/node_modules # Prevent overwriting node_modules
+    environment:
+      - NODE_ENV=development
+
+volumes:
+  postgres_data:
