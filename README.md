@@ -23,6 +23,14 @@
 - La documentación de los endpoints se encuentra en `/swagger`.  
   Para acceder, abrir en el navegador: `http://localhost:8000/swagger`.
 
+## Estructura del proyecto
+
+- La API se encuentra desarrollada en django dentro de la carpeta `resources\proyecto`. Dentro de `\api` se encuentra todo lo relacionado a los endpoints de la BDD
+- El frontend se desarrollo en next.js, ubicado en `resources\frontend`. Dentro de `frontend\app` se encuentra la estructura de las paginas de este.
+
+  Para acceder, abrir en el navegador: `http://localhost:8000/swagger`.
+
+
 
 # Prueba Fullstack - Pokémon TCG API y Frontend
 
